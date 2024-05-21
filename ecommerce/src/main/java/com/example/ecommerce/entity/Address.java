@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -42,5 +43,5 @@ public class Address {
     @JoinTable(name = "customer_adress", schema = "ecommerce",
             joinColumns = @JoinColumn(name = "address_id"),
             inverseJoinColumns = @JoinColumn(name = "customer_id"))
-    private Set<Customer> customers;
+    private Set<Customer> customers = new HashSet<>();
 }

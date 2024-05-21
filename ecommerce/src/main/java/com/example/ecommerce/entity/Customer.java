@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -25,18 +27,18 @@ public class Customer {
 
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
             mappedBy = "customerId")
-    private List<Order> orders;
+    private List<Order> orders = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "customer")
     private ShoppingCart shoppingCart;
 
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "customer")
-    private Set<Card> cards;
+    private Set<Card> cards = new HashSet<>();
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "customer_adress", schema = "ecommerce",
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "address_id"))
-    private Set<Address> addressSet;
+    private Set<Address> addressSet = new HashSet<>();
 }

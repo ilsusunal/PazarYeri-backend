@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -27,5 +28,5 @@ public class ShoppingCart {
     @JoinTable(name = "products_carts", schema = "ecommerce",
             joinColumns = @JoinColumn(name = "shopping_cart_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 }

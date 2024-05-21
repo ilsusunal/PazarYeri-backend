@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -24,5 +26,5 @@ public class ProductVariation {
 
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
             mappedBy = "varId")
-    private Product product;
+    private List<Product> products = new ArrayList<>();
 }

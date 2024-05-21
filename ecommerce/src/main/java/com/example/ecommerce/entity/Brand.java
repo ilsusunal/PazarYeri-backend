@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -22,9 +24,9 @@ public class Brand {
 
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
             mappedBy = "brandId")
-    private Set<Product> products;
+    private Set<Product> products = new HashSet<>();
 
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
             mappedBy = "brandId")
-    private List<Order> orders;
+    private List<Order> orders = new ArrayList<>();
 }

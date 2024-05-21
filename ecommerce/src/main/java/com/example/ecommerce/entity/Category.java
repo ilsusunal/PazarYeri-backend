@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -25,5 +26,5 @@ public class Category {
 
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
             mappedBy = "categoryId")
-    private Set<Product> products;
+    private Set<Product> products = new HashSet<>();
 }
