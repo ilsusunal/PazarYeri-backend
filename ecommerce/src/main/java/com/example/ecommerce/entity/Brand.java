@@ -5,24 +5,26 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "customer", schema = "ecommerce")
-public class Customer {
+@Table(name = "brand", schema = "ecommerce")
+public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
+    @Column(name = "name")
+    private String name;
 
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
-            mappedBy = "customerId")
+            mappedBy = "brandId")
+    private Set<Product> products;
+
+    @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
+            mappedBy = "brandId")
     private List<Order> orders;
 }

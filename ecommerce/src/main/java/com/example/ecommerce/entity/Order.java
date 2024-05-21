@@ -4,35 +4,26 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.Date;
+
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "product", schema = "ecommerce")
-public class Product {
+@Table(name = "order", schema = "ecommerce")
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "price")
-    private double price;
-
-    @Column(name = "description")
-    private String description;
-
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "var_id")
-    private ProductVariation varId;
+    @Column(name = "order_date")
+    private Date orderDate;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "category_id")
-    private Category categoryId;
+    @JoinColumn(name = "customer_id")
+    private Customer customerId;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "brand_id")
     private Brand brandId;
-
 }

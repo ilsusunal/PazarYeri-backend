@@ -4,25 +4,26 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "customer", schema = "ecommerce")
-public class Customer {
+@Table(name = "category", schema = "ecommerce")
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "first_name")
-    private String firstName;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "name")
+    private CategoryName name;
 
-    @Column(name = "last_name")
-    private String lastName;
+    @Column(name = "description")
+    private String description;
 
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
-            mappedBy = "customerId")
-    private List<Order> orders;
+            mappedBy = "categoryId")
+    private Set<Product> products;
 }
