@@ -42,6 +42,11 @@ public class CardServiceImpl implements CardService{
         }
         Customer customer = customerOptional.get();
 
+        Optional<Card> existingCard = cardRepository.findByCardNumber(card.getCardNo());
+        if (existingCard.isPresent()) {
+            throw new EcommerceException("Card with number " + card.getCardNo() + " already exists.", HttpStatus.BAD_REQUEST);
+        }
+
         card.setCustomer(customer);
         Set<Card> cards = customer.getCards();
         cards.add(card);
