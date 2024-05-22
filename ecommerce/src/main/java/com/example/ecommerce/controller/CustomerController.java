@@ -1,11 +1,14 @@
 package com.example.ecommerce.controller;
 
 import com.example.ecommerce.dto.CardResponse;
+import com.example.ecommerce.dto.DetailedCardResponse;
 import com.example.ecommerce.entity.Card;
 import com.example.ecommerce.service.AddressService;
 import com.example.ecommerce.service.CardService;
 import com.example.ecommerce.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,10 +26,12 @@ public class CustomerController {
         this.addressService = addressService;
     }
 
+
     //Card
     @PostMapping("/{card}")
-    public Card createCard(@RequestBody Card card){
-        return cardService.save(card);
+    public ResponseEntity<DetailedCardResponse> createCard(@RequestBody Card card, @RequestParam Long customerId){
+        DetailedCardResponse savedCard = cardService.save(card, customerId);
+        return new ResponseEntity<>(savedCard, HttpStatus.CREATED);
     }
     @GetMapping("/card")
     public List<Card> getAll(){

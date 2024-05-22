@@ -3,6 +3,7 @@ package com.example.ecommerce.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
@@ -37,7 +38,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost:9000/"));
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:9000/", "https://cdpn.io"));
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         corsConfiguration.setAllowedHeaders(List.of(HttpHeaders.AUTHORIZATION, HttpHeaders.CONTENT_TYPE));
 
@@ -54,7 +55,9 @@ public class SecurityConfig {
         return httpSecurity.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/auth/**").permitAll();
-                    auth.requestMatchers("/user/**").permitAll();
+                    auth.requestMatchers(HttpMethod.GET, "/user/**").permitAll();
+                    auth.requestMatchers(HttpMethod.POST, "/user/**").hasAuthority("USER");
+                    auth.requestMatchers(HttpMethod.PUT, "/user/**").hasAuthority("USER");
                     auth.anyRequest().authenticated();
                 })
                 //.formLogin(Customizer.withDefaults())

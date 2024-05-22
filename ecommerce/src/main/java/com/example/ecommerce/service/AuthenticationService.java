@@ -2,13 +2,16 @@ package com.example.ecommerce.service;
 
 import com.example.ecommerce.entity.Customer;
 import com.example.ecommerce.entity.Role;
+import com.example.ecommerce.exception.EcommerceException;
 import com.example.ecommerce.repository.CustomerRepository;
 import com.example.ecommerce.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -41,5 +44,10 @@ public class AuthenticationService {
 
         return customerRepository.save(user);
     }
+
+//    public Customer login(String email, String password){
+//        Optional<Customer> cust = customerRepository.findUserByEmail(email);
+//        if()
+//    }
 
 }

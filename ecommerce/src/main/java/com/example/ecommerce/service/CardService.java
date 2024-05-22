@@ -1,6 +1,7 @@
 package com.example.ecommerce.service;
 
 import com.example.ecommerce.dto.CardResponse;
+import com.example.ecommerce.dto.DetailedCardResponse;
 import com.example.ecommerce.entity.Card;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface CardService {
     //DELETE request to “/user/card/:cardId” endpoint.
     Card findById(Long id);
     List<Card> findAll();
-    Card save(Card card);
+    DetailedCardResponse save(Card card, Long customerId);
     Card update(Long id, Card card);
     CardResponse delete(Long id);
 }

@@ -1,9 +1,13 @@
 package com.example.ecommerce.service;
 
 import com.example.ecommerce.dto.CardResponse;
+import com.example.ecommerce.dto.DetailedCardResponse;
 import com.example.ecommerce.entity.Card;
+import com.example.ecommerce.entity.Customer;
 import com.example.ecommerce.exception.EcommerceException;
 import com.example.ecommerce.repository.CardRepository;
+import com.example.ecommerce.repository.CustomerRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -12,13 +16,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+@AllArgsConstructor
 @Service
 public class CardServiceImpl implements CardService{
-    private CardRepository cardRepository;
-    @Autowired
-    public CardServiceImpl(CardRepository cardRepository) {
-        this.cardRepository = cardRepository;
-    }
+    private final CardRepository cardRepository;
+    private final CustomerRepository customerRepository;
 
     @Override
     public Card findById(Long id) {
@@ -33,8 +35,21 @@ public class CardServiceImpl implements CardService{
     }
 
     @Override
-    public Card save(Card card) {
-        return cardRepository.save(card);
+    public DetailedCardResponse save(Card card, Long customerId) {
+        Optional<Customer> customerOptional = customerRepository.findById(customerId);
+        if (!customerOptional.isPresent()) {
+            throw new EcommerceException("Customer cannot be found with id: " + customerId, HttpStatus.NOT_FOUND);
+        }
+        Customer customer = customerOptional.get();
+
+        card.setCustomer(customer);
+        Set<Card> cards = customer.getCards();
+        cards.add(card);
+        customer.setCards(cards);
+
+        customerRepository.save(customer);
+        cardRepository.save(card);
+        return new DetailedCardResponse(card.getId(), card.getCardNo(), card.getExpireMonth(), card.getExpireYear(), card.getNameOnCard());
     }
 
     @Override
@@ -53,4 +68,5 @@ public class CardServiceImpl implements CardService{
         cardRepository.delete(card);
         return new CardResponse(card.getCardNo());
     }
+
 }

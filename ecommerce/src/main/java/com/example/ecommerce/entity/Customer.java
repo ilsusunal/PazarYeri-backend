@@ -1,9 +1,11 @@
 package com.example.ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -11,7 +13,8 @@ import java.util.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "customer", schema = "ecommerce")
 public class Customer implements UserDetails {
@@ -41,6 +44,7 @@ public class Customer implements UserDetails {
 
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "customer")
+    @JsonManagedReference
     private Set<Card> cards = new HashSet<>();
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -83,4 +87,29 @@ public class Customer implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(id, customer.id) &&
+                Objects.equals(email, customer.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email);
+    }
+
 }

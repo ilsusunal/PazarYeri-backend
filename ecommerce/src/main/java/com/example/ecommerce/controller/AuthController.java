@@ -3,6 +3,7 @@ package com.example.ecommerce.controller;
 import com.example.ecommerce.dto.RegisterUser;
 import com.example.ecommerce.entity.Customer;
 import com.example.ecommerce.service.AuthenticationService;
+import com.example.ecommerce.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,11 +29,9 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public Customer login(@RequestBody RegisterUser registerUser) {
-        return authenticationService.register(registerUser.getFirstName(),
-                registerUser.getLastName(),
-                registerUser.getEmail(),
-                registerUser.getPassword());
+    public Customer login(@RequestBody String email, @RequestBody String password){
+        return null;
     }
+
 
 }
