@@ -4,8 +4,7 @@ This project is the backend system for an ecommerce website called "PazarYeri", 
 PostgreSQL is used for robust and efficient database management.
 
 ### Table of Contents
-- [Introduction](#introduction)
-- [Website Features](#website-features)
+- [Introduction & Features](#introduction)
 - [Entities and Attributes](#entities-and-attributes)
 - [Relationships Between Entities](#relationships-between-entities)
 
@@ -21,9 +20,13 @@ PostgreSQL is used for robust and efficient database management.
 
 This backend is built with scalability and performance in mind, ensuring a seamless experience for both administrators and customers.
 
-## Website Features
-
 ## Entities and Attributes
 
+1. 
+
+# Representation of ER Diagram
+
 ## Relationships Between Entities
+
+# Database Model 
 
