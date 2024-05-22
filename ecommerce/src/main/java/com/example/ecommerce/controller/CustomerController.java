@@ -1,15 +1,14 @@
 package com.example.ecommerce.controller;
 
-import com.example.ecommerce.entity.Address;
+import com.example.ecommerce.dto.CardResponse;
 import com.example.ecommerce.entity.Card;
 import com.example.ecommerce.service.AddressService;
 import com.example.ecommerce.service.CardService;
 import com.example.ecommerce.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -24,14 +23,25 @@ public class CustomerController {
         this.addressService = addressService;
     }
 
-    //POST Request to endpoint to create: /user/card
+    //Card
     @PostMapping("/{card}")
     public Card createCard(@RequestBody Card card){
-        return card;
+        return cardService.save(card);
     }
-    //GET request to endpoint to list: /user/card
-    //PUT request to “/user/card
-    //DELETE request to “/user/card/:cardId” endpoint.
+    @GetMapping("/card")
+    public List<Card> getAll(){
+        return cardService.findAll();
+    }
+    @PutMapping("/{card}")
+    public Card update(@RequestBody Card card){
+        return cardService.update(card.getId(), card);
+    }
+    @DeleteMapping("/card/{cardId}")
+    public CardResponse delete(@PathVariable("cardId") Long id){
+        return cardService.delete(id);
+    }
+
+    //Address
 
     //GET request to /user/address
     //POST request to same endpoint: /user/address

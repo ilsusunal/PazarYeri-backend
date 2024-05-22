@@ -19,8 +19,16 @@ public class AuthController {
         this.authenticationService = authenticationService;
     }
 
-    @PostMapping("/register")
+    @PostMapping("/signup")
     public Customer register(@RequestBody RegisterUser registerUser) {
+        return authenticationService.register(registerUser.getFirstName(),
+                registerUser.getLastName(),
+                registerUser.getEmail(),
+                registerUser.getPassword());
+    }
+
+    @PostMapping("/login")
+    public Customer login(@RequestBody RegisterUser registerUser) {
         return authenticationService.register(registerUser.getFirstName(),
                 registerUser.getLastName(),
                 registerUser.getEmail(),
