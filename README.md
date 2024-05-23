@@ -26,7 +26,7 @@ This backend is built with scalability and performance in mind, ensuring a seaml
 
 # Representation of ER Diagram
 
-![Representation of ER Diagram.jpg](RepresentationofERDiagram.jpg)
+![](RepresentationofERDiagram.jpg)
 
 ## Relationships Between Entities
 
