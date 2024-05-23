@@ -22,9 +22,11 @@ This backend is built with scalability and performance in mind, ensuring a seaml
 
 ## Entities and Attributes
 
-1. 
+
 
 # Representation of ER Diagram
+
+![ER Diagram](D:\Projects\Backend\Representation of ER Diagram.jpg)
 
 ## Relationships Between Entities
 
