@@ -44,12 +44,17 @@ public class CustomerController {
             Card updatedCard = cardService.update(cardId, card);
             return new ResponseEntity<>(updatedCard, HttpStatus.OK);
         } catch (EcommerceException e) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(null, e.getHttpStatus());
         }
     }
     @DeleteMapping("/card/{cardId}")
-    public CardResponse delete(@PathVariable("cardId") Long id){
-        return cardService.delete(id);
+    public ResponseEntity<CardResponse> delete(@PathVariable("cardId") Long id) {
+        try {
+            CardResponse response = cardService.delete(id);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (EcommerceException e) {
+            return new ResponseEntity<>(null, e.getHttpStatus());
+        }
     }
 
     //Address
