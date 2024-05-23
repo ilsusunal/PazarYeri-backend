@@ -1,6 +1,6 @@
 #  Pazar Yeri - Ecommerce Backend
 
-This project is the backend system for an ecommerce website called "PazarYeri", designed to manage products, orders, users, and more. 
+This project is the backend system for an ecommerce website called **"PazarYeri"**, designed to manage products, orders, users, and more. 
 PostgreSQL is used for robust and efficient database management.
 
 ### Table of Contents
@@ -41,6 +41,16 @@ This backend is built with scalability and performance in mind, ensuring a seaml
 ![RepresentationofERDiagram](https://github.com/ilsusunal/PazarYeri-backend/assets/148697098/4caee880-19a4-4f98-aadd-352c6d04b327)
 
 ## Relationships Between Entities
+
+1. Order – Customer Relationship 
+   - One user can place multiple orders.
+   - Each order is placed by exactly one user.
+   - This is a **one-to-many** relationship, showing that a user can place multiple orders, but each order is placed by exactly one user.
+2. Order – Brand Relationship
+    - One brand can place multiple orders.
+    - Each order is placed by exactly one brand.
+    - This is a **one-to-many** relationship, showing that a user can place multiple orders, but each order is placed by exactly one brand.
+
 
 ## Database Model
 
