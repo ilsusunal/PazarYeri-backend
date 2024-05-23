@@ -60,11 +60,15 @@ public class CardServiceImpl implements CardService{
     @Override
     public Card update(Long id, Card card) {
         Optional<Card> cardOptional = cardRepository.findById(id);
-        if(cardOptional.isPresent()){
+        if (cardOptional.isPresent()) {
+            Card existingCard = cardOptional.get();
+
+            card.setCustomer(existingCard.getCustomer());
+
             cardRepository.save(card);
             return card;
         }
-        throw new EcommerceException("Card cannot found with id :" + id, HttpStatus.NOT_FOUND);
+        throw new EcommerceException("Card cannot be found with id: " + id, HttpStatus.NOT_FOUND);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.example.ecommerce.controller;
 import com.example.ecommerce.dto.CardResponse;
 import com.example.ecommerce.dto.DetailedCardResponse;
 import com.example.ecommerce.entity.Card;
+import com.example.ecommerce.exception.EcommerceException;
 import com.example.ecommerce.service.AddressService;
 import com.example.ecommerce.service.CardService;
 import com.example.ecommerce.service.CustomerService;
@@ -37,9 +38,14 @@ public class CustomerController {
     public List<Card> getAll(){
         return cardService.findAll();
     }
-    @PutMapping("/{card}")
-    public Card update(@RequestBody Card card){
-        return cardService.update(card.getId(), card);
+    @PutMapping("/card/{cardId}")
+    public ResponseEntity<Card> updateCard(@PathVariable Long cardId, @RequestBody Card card) {
+        try {
+            Card updatedCard = cardService.update(cardId, card);
+            return new ResponseEntity<>(updatedCard, HttpStatus.OK);
+        } catch (EcommerceException e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
     @DeleteMapping("/card/{cardId}")
     public CardResponse delete(@PathVariable("cardId") Long id){
