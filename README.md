@@ -26,7 +26,7 @@ This backend is built with scalability and performance in mind, ensuring a seaml
 
 # Representation of ER Diagram
 
-![Representation of ER Diagram.jpg](https://raw.githubusercontent.com/ilsusunal/PazarYeri-backend/main/Representation%20of%20ER%20Diagram.jpg)
+![Representation of ER Diagram.jpg](RepresentationofERDiagram.jpg)
 
 ## Relationships Between Entities
 
