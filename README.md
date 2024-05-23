@@ -26,7 +26,7 @@ This backend is built with scalability and performance in mind, ensuring a seaml
 
 # Representation of ER Diagram
 
-![ER Diagram](D:\Projects\Backend\Representation of ER Diagram.jpg)
+![Representation of ER Diagram.jpg](..%2FRepresentation%20of%20ER%20Diagram.jpg)
 
 ## Relationships Between Entities
 
